@@ -14,7 +14,9 @@ export default class Redtube {
   search(opts, cb) {
     let output = this.properties.output+'&';
     let querystring = qs.stringify(opts);
-    request.get(baseUrl+'Videos.searchVideos&output='+output+querystring, (err, response, body) => {
+    let url = `${baseUrl}Videos.searchVideos&output=${output}${querystring}`;
+
+    request.get(url, (err, response, body) => {
       if(cb){
         if (err) {
           return cb(err, null);
@@ -27,8 +29,9 @@ export default class Redtube {
   getVideoById(opts, cb) {
     let output = this.properties.output+'&';
     let querystring = qs.stringify(opts);
+    let url = `${baseUrl}Videos.getVideoById&output=${output}${querystring}`;
 
-    request.get(baseUrl+'Videos.getVideoById&output='+output+querystring, (err, response, body) => {
+    request.get(url, (err, response, body) => {
       if(cb){
         if (err) {
           return cb(err, null);

@@ -3,7 +3,7 @@ var Redtube = require('../dist/app');
 var r = new Redtube({output: 'json'});
 
 //Search method
-r.search({search: 'mommy'}, function(err, response){
+r.search({search: 'Milf'}, function(err, response){
   if(!err)
     console.log(response);
 });

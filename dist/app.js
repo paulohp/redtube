@@ -37,7 +37,9 @@ var Redtube = (function () {
     value: function search(opts, cb) {
       var output = this.properties.output + '&';
       var querystring = _qs2['default'].stringify(opts);
-      _request2['default'].get(baseUrl + 'Videos.searchVideos&output=' + output + querystring, function (err, response, body) {
+      var url = baseUrl + 'Videos.searchVideos&output=' + output + querystring;
+
+      _request2['default'].get(url, function (err, response, body) {
         if (cb) {
           if (err) {
             return cb(err, null);
@@ -51,8 +53,9 @@ var Redtube = (function () {
     value: function getVideoById(opts, cb) {
       var output = this.properties.output + '&';
       var querystring = _qs2['default'].stringify(opts);
+      var url = baseUrl + 'Videos.getVideoById&output=' + output + querystring;
 
-      _request2['default'].get(baseUrl + 'Videos.getVideoById&output=' + output + querystring, function (err, response, body) {
+      _request2['default'].get(url, function (err, response, body) {
         if (cb) {
           if (err) {
             return cb(err, null);

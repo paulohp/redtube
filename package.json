@@ -9,6 +9,7 @@
   "author": "Paulo Pires",
   "license": "MIT",
   "devDependencies": {
+    "babel": "^5.6.12",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
     "gulp-sourcemaps": "^1.5.2",

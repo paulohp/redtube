@@ -20,6 +20,10 @@ var _qs = require('qs');
 
 var _qs2 = _interopRequireDefault(_qs);
 
+var _babelPolyfill = require('babel/polyfill');
+
+var _babelPolyfill2 = _interopRequireDefault(_babelPolyfill);
+
 (0, _sourceMapSupport.install)();
 
 var baseUrl = 'http://api.redtube.com/?data=redtube.';
@@ -33,11 +37,31 @@ var Redtube = (function () {
 
   _createClass(Redtube, [{
     key: 'search',
-    value: function search(opts) {
+    value: function search(opts, cb) {
       var output = this.properties.output + '&';
       var querystring = _qs2['default'].stringify(opts);
       _request2['default'].get(baseUrl + 'Videos.searchVideos&output=' + output + querystring, function (err, body, response) {
-        console.log(err, body, response);
+        if (cb) {
+          if (err) {
+            return cb(err, null);
+          }
+          return cb(null, response);
+        }
+      });
+    }
+  }, {
+    key: 'getVideoById',
+    value: function getVideoById(opts, cb) {
+      var output = this.properties.output + '&';
+      var querystring = _qs2['default'].stringify(opts);
+
+      _request2['default'].get(baseUrl + 'Videos.getVideoById&output=' + output + querystring, function (err, body, response) {
+        if (cb) {
+          if (err) {
+            return cb(err, null);
+          }
+          return cb(null, response);
+        }
       });
     }
   }]);

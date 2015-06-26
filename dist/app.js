@@ -64,6 +64,22 @@ var Redtube = (function () {
         }
       });
     }
+  }, {
+    key: 'getVideoEmbedCode',
+    value: function getVideoEmbedCode(id, cb) {
+      var output = this.properties.output + '&';
+      var querystring = _qs2['default'].stringify({ video_id: id });
+      var url = baseUrl + 'Videos.getVideoEmbedCode&output=' + output + querystring;
+
+      _request2['default'].get(url, function (err, response, body) {
+        if (cb) {
+          if (err) {
+            return cb(err, null);
+          }
+          return cb(null, JSON.parse(response.body));
+        }
+      });
+    }
   }]);
 
   return Redtube;

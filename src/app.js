@@ -40,4 +40,19 @@ export default class Redtube {
       }
     });
   }
+
+  getVideoEmbedCode(id, cb) {
+    let output = this.properties.output+'&';
+    let querystring = qs.stringify({video_id: id});
+    let url = `${baseUrl}Videos.getVideoEmbedCode&output=${output}${querystring}`;
+
+    request.get(url, (err, response, body) => {
+      if(cb){
+        if (err) {
+          return cb(err, null);
+        }
+        return cb(null, JSON.parse(response.body));
+      }
+    });
+  }
 }

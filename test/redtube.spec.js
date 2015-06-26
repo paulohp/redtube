@@ -27,4 +27,12 @@ describe('Redtube', () => {
       done();
     });
   });
+
+  it('should return a embed video for the getVideoEmbedCode', done => {
+    r.getVideoEmbedCode(1147059, (err, response) => {
+      expect(err).to.be.a('null');
+      expect(response).to.be.a('object');
+      done();
+    });
+  });
 });

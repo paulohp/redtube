@@ -20,10 +20,6 @@ var _qs = require('qs');
 
 var _qs2 = _interopRequireDefault(_qs);
 
-var _babelPolyfill = require('babel/polyfill');
-
-var _babelPolyfill2 = _interopRequireDefault(_babelPolyfill);
-
 (0, _sourceMapSupport.install)();
 
 var baseUrl = 'http://api.redtube.com/?data=redtube.';
@@ -32,6 +28,7 @@ var Redtube = (function () {
   function Redtube(properties) {
     _classCallCheck(this, Redtube);
 
+    if (!properties || properties.output === undefined) properties.output = 'json';
     this.properties = properties;
   }
 
@@ -40,12 +37,12 @@ var Redtube = (function () {
     value: function search(opts, cb) {
       var output = this.properties.output + '&';
       var querystring = _qs2['default'].stringify(opts);
-      _request2['default'].get(baseUrl + 'Videos.searchVideos&output=' + output + querystring, function (err, body, response) {
+      _request2['default'].get(baseUrl + 'Videos.searchVideos&output=' + output + querystring, function (err, response, body) {
         if (cb) {
           if (err) {
             return cb(err, null);
           }
-          return cb(null, response);
+          return cb(null, JSON.parse(response.body));
         }
       });
     }
@@ -55,12 +52,12 @@ var Redtube = (function () {
       var output = this.properties.output + '&';
       var querystring = _qs2['default'].stringify(opts);
 
-      _request2['default'].get(baseUrl + 'Videos.getVideoById&output=' + output + querystring, function (err, body, response) {
+      _request2['default'].get(baseUrl + 'Videos.getVideoById&output=' + output + querystring, function (err, response, body) {
         if (cb) {
           if (err) {
             return cb(err, null);
           }
-          return cb(null, response);
+          return cb(null, JSON.parse(response.body));
         }
       });
     }

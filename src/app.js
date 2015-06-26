@@ -1,24 +1,25 @@
 import { install } from 'source-map-support';
 import request from 'request';
 import qs from 'qs';
-import polyfill from 'babel/polyfill';
 install();
 
 const baseUrl = 'http://api.redtube.com/?data=redtube.';
 export default class Redtube {
   constructor(properties) {
+    if(!properties || properties.output === undefined)
+      properties.output = 'json'
     this.properties = properties;
   }
 
   search(opts, cb) {
     let output = this.properties.output+'&';
     let querystring = qs.stringify(opts);
-    request.get(baseUrl+'Videos.searchVideos&output='+output+querystring, (err, body, response) => {
+    request.get(baseUrl+'Videos.searchVideos&output='+output+querystring, (err, response, body) => {
       if(cb){
         if (err) {
           return cb(err, null);
         }
-        return cb(null, response);
+        return cb(null, JSON.parse(response.body));
       }
     });
   }
@@ -27,12 +28,12 @@ export default class Redtube {
     let output = this.properties.output+'&';
     let querystring = qs.stringify(opts);
 
-    request.get(baseUrl+'Videos.getVideoById&output='+output+querystring, (err, body, response) => {
+    request.get(baseUrl+'Videos.getVideoById&output='+output+querystring, (err, response, body) => {
       if(cb){
         if (err) {
           return cb(err, null);
         }
-        return cb(null, response);
+        return cb(null, JSON.parse(response.body));
       }
     });
   }

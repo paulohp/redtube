@@ -16,6 +16,10 @@ var _request = require('request');
 
 var _request2 = _interopRequireDefault(_request);
 
+var _qs = require('qs');
+
+var _qs2 = _interopRequireDefault(_qs);
+
 (0, _sourceMapSupport.install)();
 
 var baseUrl = 'http://api.redtube.com/?data=redtube.';
@@ -30,7 +34,9 @@ var Redtube = (function () {
   _createClass(Redtube, [{
     key: 'search',
     value: function search(opts) {
-      _request2['default'].get(baseUrl + 'Videos.searchVideos&output=' + this.properties.output + opts, function (err, body, response) {
+      var output = this.properties.output + '&';
+      var querystring = _qs2['default'].stringify(opts);
+      _request2['default'].get(baseUrl + 'Videos.searchVideos&output=' + output + querystring, function (err, body, response) {
         console.log(err, body, response);
       });
     }

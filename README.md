@@ -29,7 +29,7 @@ r.getVideoById({video_id: 1147059, thumbsize: 'all'}, function(err, response){
 });
 ```
 
-#LICENSE
+# LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2015 Paulo Pires
